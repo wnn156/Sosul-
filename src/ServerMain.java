@@ -33,7 +33,7 @@ public class ServerMain extends AbstractServer {
 	final public static int DEFAULT_PORT = 5555;
 
 	/**
-	 * ȸ���� �� �α��� �׽�Ʈ�� ������
+	 * 회占쏙옙占쏙옙 占쏙옙 占싸깍옙占쏙옙 占쌓쏙옙트占쏙옙 占쏙옙占쏙옙占쏙옙
 	 */
 	private Map<String, String> userInfo;
 
@@ -49,6 +49,9 @@ public class ServerMain extends AbstractServer {
 		super(port);
 
 		userInfo = new HashMap<String, String>();
+		
+		//receive id, password form userfile
+		userInfo.put("123", "123");
 	}
 
 	// Instance methods ************************************************
@@ -70,15 +73,16 @@ public class ServerMain extends AbstractServer {
 			User user = (User) msg.getData(); 
 		
 			switch(msg.getMode()) {
-			case 'a':  // append (ȸ���� �� ��)
+			case 'a':  // append (회占쏙옙占쏙옙 占쏙옙 占쏙옙)
 				System.out.println(">> Success to register ID : " + user.getId());
+				System.out.println(user);
 				userInfo.put(user.getId(), user.getPassWord());
 				client.sendToClient(new Message('s'));
 				break;
 			
-			case 'c':  // check (�α��� �� ��)
+			case 'c':  // check (占싸깍옙占쏙옙 占쏙옙 占쏙옙)
 				String pw = userInfo.get(user.getPassWord());
-				if (pw == null || !pw.equals(user.getPassWord())) {  // �������� �ʴ� ID�ų� ��й�ȣ�� Ʋ���� ��
+				if (pw == null || !pw.equals(user.getPassWord())) {  // 占쏙옙占쏙옙占쏙옙占쏙옙 占십댐옙 ID占신놂옙 占쏙옙橘占싫ｏ옙占� 틀占쏙옙占쏙옙 占쏙옙
 					System.out.println(">> Fail to join ID : " + user.getId());
 					client.sendToClient(new Message('f'));
 				}
@@ -119,7 +123,7 @@ public class ServerMain extends AbstractServer {
 	 */
 	public static void main(String[] args) {
 		int port = 0; // Port to listen on
-
+		
 		try {
 			port = Integer.parseInt(args[0]); // Get port from command line
 		} catch (Throwable t) {
@@ -127,6 +131,7 @@ public class ServerMain extends AbstractServer {
 		}
 
 		ServerFrame sf = new ServerFrame();
+			
 		sf.startLogging();
 		
 		ServerMain sv = new ServerMain(port);

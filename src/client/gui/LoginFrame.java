@@ -17,11 +17,12 @@ import client.ChatClient;
 
 import common.Message;
 import common.gui.AbstractFrame;
+import javax.swing.JPanel;
 
 /**
  * 
  * @author Wooyong Choi
- * �α����� �ϱ� ���� ������ 
+ * 占싸깍옙占쏙옙占쏙옙 占싹깍옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 
  * 
  */
 public class LoginFrame extends AbstractFrame {
@@ -33,15 +34,15 @@ public class LoginFrame extends AbstractFrame {
 	private JPasswordField tfPW;
 	
 	public LoginFrame(ChatClient chatClient) {
-		// Size �Ѱ� �� (Width, Height)
+		// Size 占싼곤옙 占쏙옙 (Width, Height)
 		super(450, 270);
 
 		this.client = chatClient;	
 		
-		// ��ü Client UI�� ��Ʈ�� Times �Ϲ�, ũ��� 20���� ����
+		// 占쏙옙체 Client UI占쏙옙 占쏙옙트占쏙옙 Times 占싹뱄옙, 크占쏙옙占� 20占쏙옙占쏙옙 占쏙옙占쏙옙
         setUIFont(new FontUIResource(new Font("Times", Font.PLAIN, 20)));
 		
-		// �ܼ� Text ǥ���ϴ� ��ü(JLabel) ��
+		// 占쌤쇽옙 Text 표占쏙옙占싹댐옙 占쏙옙체(JLabel) 占쏙옙
 		JLabel lblID = new JLabel("ID");
 		lblID.setBounds(116, 55, 62, 18);
 		contentPane.add(lblID);
@@ -51,7 +52,7 @@ public class LoginFrame extends AbstractFrame {
 		contentPane.add(lblPW);
 
 		
-		// Text �Է¹��� �� �ִ� ��ü(JTextField) ��
+		// Text 占쌉력뱄옙占쏙옙 占쏙옙 占쌍댐옙 占쏙옙체(JTextField) 占쏙옙
 		tfID = new JTextField();
 		tfID.setBounds(165, 49, 136, 30);
 		contentPane.add(tfID);
@@ -63,17 +64,17 @@ public class LoginFrame extends AbstractFrame {
 		tfPW.setColumns(10);
 		
 		
-		// �α��� �� ȸ���� ��ư(JButton) ǥ��
+		// 占싸깍옙占쏙옙 占쏙옙 회占쏙옙占쏙옙 占쏙옙튼(JButton) 표占쏙옙
 		JButton btnSignin = new JButton("Sign in");
 		btnSignin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// �α��� ��ư�� ������ �� ����
-				// TextField���� �Էµ� ID�� PW�� �����ͼ� ���� ��ü ��
+				// 占싸깍옙占쏙옙 占쏙옙튼占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙
+				// TextField占쏙옙占쏙옙 占쌉력듸옙 ID占쏙옙 PW占쏙옙 占쏙옙占쏙옙占싶쇽옙 占쏙옙占쏙옙 占쏙옙체 占쏙옙
 				String inputID = tfID.getText();
 				String inputPW = tfPW.getText();
 				User user = new User(inputID, inputPW);
 				
-				// ������ ������ Check
+				// 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 Check
 				Message msg = null;
 				try {
 					client.sendToServer(new Message(user, 'c'));
@@ -85,10 +86,10 @@ public class LoginFrame extends AbstractFrame {
 				
 				switch(msg.getMode()) {
 				case 's': // Success
-			        // ���� ��Ƽ� MainFrame �ѱ�
+			        // 占쏙옙占쏙옙 占쏙옙티占� MainFrame 占싼깍옙
 					new MainFrame(user);
 					
-					// LoginFrame ����
+					// LoginFrame 占쏙옙占쏙옙
 					dispose();
 					break;
 					
@@ -105,28 +106,16 @@ public class LoginFrame extends AbstractFrame {
 		JButton btnRegister = new JButton("Register");
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// ȸ���� ��ư�� ������ �� ����
-				// ID�� PW�� �Է¹��� Dialog�� ���
-				String newID = JOptionPane.showInputDialog("Please input your ID.");
-				String newPW = JOptionPane.showInputDialog("Please input your Password");
-				User user = new User(newID, newPW);
-
-				// ������ ȸ������ ���� Append
-				try {
-					client.sendToServer(new Message(user, 'a'));
-					client.receiveFromServer();
-				} catch (IOException | ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+				
+				new RegisterFrame(client);
+				
+			}			
 		});
 		btnRegister.setBounds(212, 157, 130, 35);
 		contentPane.add(btnRegister);
 
 		
-		// ���̰� ����
+		// 占쏙옙占싱곤옙 占쏙옙占쏙옙
 		setVisible(true);
 	}
-	
 }

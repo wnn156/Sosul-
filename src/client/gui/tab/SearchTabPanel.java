@@ -43,7 +43,7 @@ public class SearchTabPanel extends AbstractTabPanel {
 	public SearchTabPanel(User user) {
 		super(user);
 		
-		// �׽�Ʈ�� ��ǰ ��
+		// from postfile
 		testProduct1.add(new Product("item1", "./figures/picture1.png", 1100000));
 		testProduct1.add(new Product("item2", "./figures/picture2.png", 1400000));
 		testProduct1.add(new Product("item3", "./figures/picture3.png",  900000));
@@ -53,7 +53,7 @@ public class SearchTabPanel extends AbstractTabPanel {
 		
 		// GUI part
 		JLabel lblTitle = new JLabel("Search");
-		lblTitle.setFont(new Font("���� ���", Font.BOLD, 30));
+		lblTitle.setFont(new Font("占쏙옙占쏙옙 占쏙옙占�", Font.BOLD, 30));
 		lblTitle.setBounds(40, 33, 240, 30);
 		add(lblTitle);
 		
@@ -63,7 +63,7 @@ public class SearchTabPanel extends AbstractTabPanel {
 		add(lblForSale);
 		
 		
-		// �̸��� ���� ���
+		// 占싱몌옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
 		final JTextArea lblProductName = new JTextArea();
 		lblProductName.setBounds(600, 222, 80, 30);
 		lblProductName.setText("Name :");
@@ -83,35 +83,35 @@ public class SearchTabPanel extends AbstractTabPanel {
 		add(txtProductPrice);
 		
 		
-		// ��ǰ �̹����� Label�� Icon���� ����
+		// 占쏙옙품 占싱뱄옙占쏙옙占쏙옙 Label占쏙옙 Icon占쏙옙占쏙옙 占쏙옙占쏙옙
 		final JLabel lblProductImage = new JLabel();
 		lblProductImage.setBounds(607, 275, 180, 280);
 		add(lblProductImage);
 		
 
-		// Scroll ������ List �����ִ� ��ü �� (ScrollPane �ȿ� JList ����
+		// Scroll 占쏙옙占쏙옙占쏙옙 List 占쏙옙占쏙옙占쌍댐옙 占쏙옙체 占쏙옙 (ScrollPane 占싫울옙 JList 占쏙옙占쏙옙
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(40, 150, 530, 425);
 		add(scrollPane);
 
 		
-		// Listmodel �� (List�� element�� ���� ������ ����)
+		// Listmodel 占쏙옙 (List占쏙옙 element占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙)
 		listModel = new DefaultListModel();
 		for (Product element : testProduct1) {
 			listModel.addElement(element.getName());
 		}
 		
-		// Listmodel�� ������ JList ���ϰ� Scroll ������ Panel�� �߰� 
+		// Listmodel占쏙옙 占쏙옙占쏙옙占쏙옙 JList 占쏙옙占싹곤옙 Scroll 占쏙옙占쏙옙占쏙옙 Panel占쏙옙 占쌩곤옙 
 		list = new JList(listModel);
 		scrollPane.setViewportView(list);
 		
 		
-		// ����Ʈ���� Ŭ�� �� ��ǰ ������ ���� ���
+		// 占쏙옙占쏙옙트占쏙옙占쏙옙 클占쏙옙 占쏙옙 占쏙옙품 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
 		list.addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-		        // Ŭ���� ��� ���� ǥ��
+		        // 클占쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙 표占쏙옙
 	            int index = list.getSelectedIndex();
 	            if ( index < 0 ) return ;
 	            if ( rd1.isSelected() ) {
@@ -131,35 +131,35 @@ public class SearchTabPanel extends AbstractTabPanel {
 		});
 		
 		
-		// ����Ʈ���� ���� Ŭ�� �� ���� �����ֵ��� ��
+		// 占쏙옙占쏙옙트占쏙옙占쏙옙 占쏙옙占쏙옙 클占쏙옙 占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쌍듸옙占쏙옙 占쏙옙
 		list.addMouseListener(new MouseAdapter() {
 		    public void mouseClicked(MouseEvent evt) {
 		        JList list = (JList) evt.getSource();
 		        
 		        if (evt.getClickCount() != 0) {
 		        }
-		        // Double-click�� ���
+		        // Double-click占쏙옙 占쏙옙占�
 		        if (evt.getClickCount() == 2) {
-		        	// Ŭ���� Index ������
+		        	// 클占쏙옙占쏙옙 Index 占쏙옙占쏙옙占쏙옙
 		            int index = list.locationToIndex(evt.getPoint());
 		            if ( index < 0 ) return ;
 		            
 		            if ( rd1.isSelected() ) {
 		            	if ( index >= testProduct1.size() ) return ;
 		            	Product selected = testProduct1.get(index);
-			            String msg = String.format("%s : %,d��", selected.getName(), selected.getPrice());
+			            String msg = String.format("%s : %,d占쏙옙", selected.getName(), selected.getPrice());
 			            JOptionPane.showMessageDialog(SearchTabPanel.this, msg, "Infomation", JOptionPane.INFORMATION_MESSAGE);
 					} else if ( rd2.isSelected() ) {
 						if ( index >= testProduct2.size() ) return ;
 						Product selected = testProduct2.get(index);
-			            String msg = String.format("%s : %,d��", selected.getName(), selected.getPrice());
+			            String msg = String.format("%s : %,d占쏙옙", selected.getName(), selected.getPrice());
 			            JOptionPane.showMessageDialog(SearchTabPanel.this, msg, "Infomation", JOptionPane.INFORMATION_MESSAGE);
 					}
 		        }
 		    }
 		});
 		
-		// �ɼ� ���ÿ� ��� ����Ʈ ���� ����
+		// 占심쇽옙 占쏙옙占시울옙 占쏙옙占� 占쏙옙占쏙옙트 占쏙옙占쏙옙 占쏙옙占쏙옙
 		ButtonGroup optionGroup = new ButtonGroup();
 		rd1 = new JRadioButton("option1");
 		rd2 = new JRadioButton("option2");
@@ -171,46 +171,46 @@ public class SearchTabPanel extends AbstractTabPanel {
 		add(rd2);
 		rd1.addItemListener(new RadioButtonSelectedEvent());
 		rd2.addItemListener(new RadioButtonSelectedEvent());
-		// �⺻���� ���õ� �ɼ�1
+		// 占썩본占쏙옙占쏙옙 占쏙옙占시듸옙 占심쇽옙1
 		rd1.setSelected(true);
 		
 
-		// ��� ��ư �߰�
-		// ��� ��ư�� ���� Listener�� MainFrame�� ����
-		// �ֳ��ϸ� SearchTab�� ��ü�� InfoTab�� ��ü�� ������ �ʿ䰡 �ֱ� ����
+		// 占쏙옙占� 占쏙옙튼 占쌩곤옙
+		// 占쏙옙占� 占쏙옙튼占쏙옙 占쏙옙占쏙옙 Listener占쏙옙 MainFrame占쏙옙 占쏙옙占쏙옙
+		// 占쌍놂옙占싹몌옙 SearchTab占쏙옙 占쏙옙체占쏙옙 InfoTab占쏙옙 占쏙옙체占쏙옙 占쏙옙占쏙옙占쏙옙 占십요가 占쌍깍옙 占쏙옙占쏙옙
 		btnContract = new JButton("Contract");
 		btnContract.setBounds(607, 150, 181, 51);
 		add(btnContract);
 		
-		// ���� �����͸� �߰��ϴ� ��ư
+		// 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쌩곤옙占싹댐옙 占쏙옙튼
 		JButton btnNewData = new JButton("Add new Data");
 		btnNewData.setBounds(607, 500, 181, 45);
 		add(btnNewData);
 		btnNewData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// �ɼ� 1 �� �� ������ ����Ʈ
+				// 占심쇽옙 1 占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙트
 				if ( rd1.isSelected() ) {
 					testProduct1.add(new Product(txtProductName.getText(), "", Integer.parseInt(txtProductPrice.getText())));
 				} else if ( rd2.isSelected() ) {
-					// �ɼ� 2 �� �� ������ ����Ʈ
+					// 占심쇽옙 2 占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙트
 					testProduct2.add(new Product(txtProductName.getText(), "", Integer.parseInt(txtProductPrice.getText())));
 				}
 				updateList();
 			}
 		});
 		
-		// ���� �����͸� �����ϴ� ��ư
+		// 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占싹댐옙 占쏙옙튼
 		JButton btnDelData = new JButton("Del existing Data");
 		btnDelData.setBounds(607, 550, 181, 45);
 		add(btnDelData);
 		btnDelData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int index = list.getSelectedIndex();
-				// �ɼ� 1 �� �� 
+				// 占심쇽옙 1 占쏙옙 占쏙옙 
 				if ( rd1.isSelected() ) {
 					testProduct1.remove(index);
 				} else if ( rd2.isSelected() ) {
-					// �ɼ� 2 �� �� 
+					// 占심쇽옙 2 占쏙옙 占쏙옙 
 					testProduct2.remove(index);
 				}
 				updateList();
@@ -218,7 +218,7 @@ public class SearchTabPanel extends AbstractTabPanel {
 		});
 	}
 	
-	// class ������� �̺�Ʈ�� ǥ���ϴ� ���
+	// class 占쏙옙占쏙옙占쏙옙占� 占싱븝옙트占쏙옙 표占쏙옙占싹댐옙 占쏙옙占�
 	class RadioButtonSelectedEvent implements ItemListener {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
@@ -227,14 +227,14 @@ public class SearchTabPanel extends AbstractTabPanel {
 	}
 	
 	private void updateList() {
-		// �ɼ� 1 �� �� ������ ����Ʈ
+		// 占심쇽옙 1 占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙트
 		listModel.clear();
 		if ( rd1.isSelected() ) {
 			for (Product element : testProduct1) {
 				listModel.addElement(element.getName());
 			}
 		} else if ( rd2.isSelected() ) {
-			// �ɼ� 2 �� �� ������ ����Ʈ
+			// 占심쇽옙 2 占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙트
 			for (Product element : testProduct2) {
 				listModel.addElement(element.getName());
 			}

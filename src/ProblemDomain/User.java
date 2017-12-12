@@ -9,7 +9,7 @@ class Birth implements Serializable{
 	private int month;
 	private int day;
 	
-	//생성자
+	//���깆��
 	public Birth(){
 		year = 0;
 		month = 0;
@@ -48,6 +48,11 @@ class Birth implements Serializable{
 		return day;
 	}
 	
+	
+	@Override
+	public String toString(){
+		return year + "." + month + "." + day;
+	}
 }
 
 public class User implements Serializable {
@@ -63,8 +68,9 @@ public class User implements Serializable {
 	private String introduction;
 	private float grade;
 	private String schoolEmail;
+	private int gender;
 	
-	//생성자
+	//���깆��
 	public User(){
 		id = null;
 		passWord = null;
@@ -90,26 +96,30 @@ public class User implements Serializable {
 		introduction = null;
 		grade = 0;
 		schoolEmail = null;
+		gender = -1;
 	}
-	public User(String id, String passWord, String phoneNumber, String address, Birth birth, String name, File Fimage, boolean check, String introduction, float grade, String schoolEmail){
+	
+	public User(String id, String passWord, String phoneNumber, String address, int year, int month, int day, String name, String schoolEmail, int gender, String introduction){
 		this.id = id;
 		this.passWord = passWord;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
-		this.birth = birth;
+		Birth abirth = new Birth(year, month, day);
+		this.birth = abirth;
 		this.name = name;
-		this.Fimage = Fimage;
-		this.check = check;
+		this.Fimage = null;
+		this.check = true;//구현 x
 		this.introduction = introduction;
-		this.grade = grade;
+		this.grade = 0;
 		this.schoolEmail = schoolEmail;
+		this.gender = gender;
 	}
-	//mypage 확인하기
+	//mypage ���명��湲�
 	public void mypage(){
 		
 	}
 	
-	//환불하기
+	//��遺���湲�
 	public void refund(){
 		
 	}
@@ -159,6 +169,10 @@ public class User implements Serializable {
 		this.schoolEmail = schoolEmail;
 	}
 	
+	public void setGender(int gender){
+		this.gender = gender;
+	}
+	
 	//get method
 	public String getId(){
 		return id;
@@ -196,6 +210,12 @@ public class User implements Serializable {
 		return introduction;
 	}
 	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", passWord=" + passWord + ", phoneNumber=" + phoneNumber + ", address=" + address
+				+ ", birth=" + birth + ", name=" + name + ", Fimage=" + Fimage + ", check=" + check + ", introduction="
+				+ introduction + ", grade=" + grade + ", schoolEmail=" + schoolEmail + ", gender=" + gender + "]";
+	}
 	public float getGrade(){
 		return grade;
 	}
@@ -204,5 +224,8 @@ public class User implements Serializable {
 		return schoolEmail;
 	}
 	
-
+	public int getGender(){
+		return gender;
+	}
+	
 }
