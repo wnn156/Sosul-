@@ -85,13 +85,31 @@ public class InfoTabPanel extends AbstractTabPanel {
 			public void mouseClicked(MouseEvent evt) {
 				JList list = (JList) evt.getSource();
 
-				// Double-click占쏙옙 占쏙옙占�
+				// Double-click handler
 				if (evt.getClickCount() == 2) {
-					// 클占쏙옙占쏙옙 Index 占쏙옙占쏙옙占쏙옙
+					// receive index from list
 					int index = list.locationToIndex(evt.getPoint());
 
 					String selected = (String) listModel.getElementAt(index);
 					String msg = String.format("%s : %d man won", selected, index * 100);
+
+					JOptionPane.showMessageDialog(InfoTabPanel.this, msg, "Infomation",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
+		
+		list2.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				JList list = (JList) evt.getSource();
+
+				// Double-click handler
+				if (evt.getClickCount() == 2) {
+					// receive index from list
+					int index = list.locationToIndex(evt.getPoint());
+
+					String selected = (String) listModel.getElementAt(index);
+					String msg = String.format("%s : %d man won", selected, index * 200);
 
 					JOptionPane.showMessageDialog(InfoTabPanel.this, msg, "Infomation",
 							JOptionPane.INFORMATION_MESSAGE);
