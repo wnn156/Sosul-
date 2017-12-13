@@ -1,55 +1,60 @@
 package client.gui.tab;
 
-import info.Product;
-
+import java.awt.Choice;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import ProblemDomain.Post;
 import ProblemDomain.User;
+import info.Product;
 
-public class SearchTabPanel extends AbstractTabPanel {
+public class SearchTabPanel extends AbstractTabPanel{
 
 	private DefaultListModel listModel;
 	private JList list;
 
 	private JButton btnContract;
-	final JRadioButton rd1;
-	final JRadioButton rd2;
-
+	//final JRadioButton rd1;
+	//final JRadioButton rd2;
+	Choice choice;
+	JScrollPane scrollPane;
+	final ArrayList<Post> postList = new ArrayList<Post>();
+	
 	final List<Product> testProduct1 = new ArrayList<>();
 	final List<Product> testProduct2 = new ArrayList<>();
 	
 	public SearchTabPanel(User user) {
+		
 		super(user);
 		
 		// from postfile
+		postList.add(new Post(1,"Post1", 2));
+		postList.add(new Post(2,"Post2", 6));
+		postList.add(new Post(3,"Post3", 11));
+		
+		/*
 		testProduct1.add(new Product("item1", "./figures/picture1.png", 1100000));
 		testProduct1.add(new Product("item2", "./figures/picture2.png", 1400000));
 		testProduct1.add(new Product("item3", "./figures/picture3.png",  900000));
 		testProduct2.add(new Product("item4", "./figures/picture4.png", 2200000));
 		testProduct2.add(new Product("item5", "./figures/picture5.png", 3400000));
 		testProduct2.add(new Product("item6", "./figures/picture6.png", 5600000));
+		*/
+		
 		
 		// GUI part
 		JLabel lblTitle = new JLabel("Search");
@@ -90,21 +95,34 @@ public class SearchTabPanel extends AbstractTabPanel {
 		
 
 		// Scroll 占쏙옙占쏙옙占쏙옙 List 占쏙옙占쏙옙占쌍댐옙 占쏙옙체 占쏙옙 (ScrollPane 占싫울옙 JList 占쏙옙占쏙옙
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(40, 150, 530, 425);
 		add(scrollPane);
 
-		
-		// Listmodel 占쏙옙 (List占쏙옙 element占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙)
 		listModel = new DefaultListModel();
-		for (Product element : testProduct1) {
-			listModel.addElement(element.getName());
+		for (int i=0;i<postList.size();i++) {
+			listModel.addElement(postList.get(i).getTitle());
 		}
 		
 		// Listmodel占쏙옙 占쏙옙占쏙옙占쏙옙 JList 占쏙옙占싹곤옙 Scroll 占쏙옙占쏙옙占쏙옙 Panel占쏙옙 占쌩곤옙 
 		list = new JList(listModel);
 		scrollPane.setViewportView(list);
 		
+		
+		choice = new Choice();
+ 		choice.setBounds(256, 69, 200, 30);
+ 		choice.addItem("Size of Room");
+ 		choice.addItem("Big");
+ 		choice.addItem("Middle");
+ 		choice.addItem("Small");
+ 		choice.select(0);
+ 		add(choice);
+ 		choice.setVisible(true);
+ 		
+ 		choice.addItemListener(new CheckBoxSelectedEvent());
+ 		
+		// Listmodel 占쏙옙 (List占쏙옙 element占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙)
+	
 		
 		// 占쏙옙占쏙옙트占쏙옙占쏙옙 클占쏙옙 占쏙옙 占쏙옙품 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�
 		list.addListSelectionListener(new ListSelectionListener() {
@@ -114,6 +132,8 @@ public class SearchTabPanel extends AbstractTabPanel {
 		        // 클占쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙 표占쏙옙
 	            int index = list.getSelectedIndex();
 	            if ( index < 0 ) return ;
+	           
+/*
 	            if ( rd1.isSelected() ) {
 	            	if ( index >= testProduct1.size() ) return ;
 	            	Product selected = testProduct1.get(index);
@@ -127,10 +147,11 @@ public class SearchTabPanel extends AbstractTabPanel {
 	            	txtProductPrice.setText(selected.getPrice()+"");
 		    		lblProductImage.setIcon(new ImageIcon(selected.getFigurePath()));
 				}
-			}
+			*/}
+			
 		});
 		
-		
+		/*
 		// 占쏙옙占쏙옙트占쏙옙占쏙옙 占쏙옙占쏙옙 클占쏙옙 占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쌍듸옙占쏙옙 占쏙옙
 		list.addMouseListener(new MouseAdapter() {
 		    public void mouseClicked(MouseEvent evt) {
@@ -158,9 +179,10 @@ public class SearchTabPanel extends AbstractTabPanel {
 		        }
 		    }
 		});
-		
+		*/
 		// 占심쇽옙 占쏙옙占시울옙 占쏙옙占� 占쏙옙占쏙옙트 占쏙옙占쏙옙 占쏙옙占쏙옙
 		ButtonGroup optionGroup = new ButtonGroup();
+		/*
 		rd1 = new JRadioButton("option1");
 		rd2 = new JRadioButton("option2");
 		rd1.setBounds(40, 70, 100, 30);
@@ -174,7 +196,11 @@ public class SearchTabPanel extends AbstractTabPanel {
 		// 占썩본占쏙옙占쏙옙 占쏙옙占시듸옙 占심쇽옙1
 		rd1.setSelected(true);
 		
-
+*/
+		
+		
+		
+		
 		// 占쏙옙占� 占쏙옙튼 占쌩곤옙
 		// 占쏙옙占� 占쏙옙튼占쏙옙 占쏙옙占쏙옙 Listener占쏙옙 MainFrame占쏙옙 占쏙옙占쏙옙
 		// 占쌍놂옙占싹몌옙 SearchTab占쏙옙 占쏙옙체占쏙옙 InfoTab占쏙옙 占쏙옙체占쏙옙 占쏙옙占쏙옙占쏙옙 占십요가 占쌍깍옙 占쏙옙占쏙옙
@@ -186,6 +212,8 @@ public class SearchTabPanel extends AbstractTabPanel {
 		JButton btnNewData = new JButton("Add new Data");
 		btnNewData.setBounds(607, 500, 181, 45);
 		add(btnNewData);
+		
+		/*
 		btnNewData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// 占심쇽옙 1 占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙트
@@ -198,11 +226,15 @@ public class SearchTabPanel extends AbstractTabPanel {
 				updateList();
 			}
 		});
+		*/
 		
 		// 占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占싹댐옙 占쏙옙튼
 		JButton btnDelData = new JButton("Del existing Data");
 		btnDelData.setBounds(607, 550, 181, 45);
 		add(btnDelData);
+		
+		
+		/*
 		btnDelData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int index = list.getSelectedIndex();
@@ -216,8 +248,13 @@ public class SearchTabPanel extends AbstractTabPanel {
 				updateList();
 			}
 		});
+		*/
+		
+		
 	}
 	
+	
+	/*
 	// class 占쏙옙占쏙옙占쏙옙占� 占싱븝옙트占쏙옙 표占쏙옙占싹댐옙 占쏙옙占�
 	class RadioButtonSelectedEvent implements ItemListener {
 		@Override
@@ -240,7 +277,55 @@ public class SearchTabPanel extends AbstractTabPanel {
 			}
 		}
 	}
-
+	*/
+	class CheckBoxSelectedEvent implements ItemListener{
+		public void itemStateChanged(ItemEvent e){
+			updateList();
+		}
+	}
+	private void updateList(){
+		listModel.clear();
+		System.out.println(choice.getSelectedItem());
+		if(choice.getSelectedItem().equals("Big")){
+ 			listModel = new DefaultListModel();
+ 			for(int i=0;i<postList.size();i++){
+ 				System.out.println(i);
+ 				System.out.println(postList.get(i));
+ 				System.out.println(postList.get(i).getRoom());
+ 				if(postList.get(i).getRoom().getSize()>10.0){
+ 					listModel.addElement(postList.get(i).getTitle());
+ 				}
+ 			}
+ 		}
+ 		else if(choice.getSelectedItem().equals("Middle")){
+ 			listModel = new DefaultListModel();
+ 			for(int i=0;i<postList.size();i++){
+ 				System.out.println(i);
+ 				System.out.println(postList.get(i));
+ 				if(postList.get(i).getRoom().getSize()<=10.0 && postList.get(i).getRoom().getSize()>=5.0){
+ 					listModel.addElement(postList.get(i).getTitle());
+ 				}
+ 			}
+ 		}
+ 		else if(choice.getSelectedItem().equals("Small")){
+ 			listModel = new DefaultListModel();
+ 			for(int i=0;i<postList.size();i++){
+ 				System.out.println(i);
+ 				System.out.println(postList.get(i));
+ 				if(postList.get(i).getRoom().getSize()<5.0){
+ 					listModel.addElement(postList.get(i).getTitle());
+ 				}
+ 			}
+ 		}
+ 		else{
+ 			listModel = new DefaultListModel();
+ 			for(int i=0;i<postList.size();i++){
+ 				listModel.addElement(postList.get(i).getTitle());
+ 			}
+ 		}
+		list = new JList(listModel);
+		scrollPane.setViewportView(list);
+	}
 	public JList getList() {
 		return list;
 	}
@@ -265,4 +350,5 @@ public class SearchTabPanel extends AbstractTabPanel {
 	public void setBtnContract(JButton btnContract) {
 		this.btnContract = btnContract;
 	}
+
 }

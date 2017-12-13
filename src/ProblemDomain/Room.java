@@ -8,13 +8,40 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 
-class Price{
+class Price implements Serializable{
 	private boolean trustcost;
 	private float cost;
-	private float supoort;
+	private float suport;
+	
+	public Price(){
+		trustcost = false;
+		cost = 0;
+		suport = 0;
+	}
+	
+	public void setTrustcost(boolean trustcost){
+		this.trustcost = trustcost;
+	}
+	public boolean getTrustcost(){
+		return trustcost;
+	}
+	public void setCost(float cost){
+		this.cost = cost;
+	}
+	public float getCost(){
+		return cost;
+	}
+	public void setSuport(float suport){
+		this.suport = suport;
+	}
+	public float getSuport(){
+		return suport;
+	}
+	
 }
 
 
@@ -48,7 +75,7 @@ public class Room implements Serializable{
 		
 		}
 	
-	public Room(String opt,int stair,int sound, int size, int window,int clean, Price price, String introduce, String period){
+	public Room(String opt,int stair,int sound, float size, int window,int clean, Price price, String introduce, String period){
 		
 	}
 	
@@ -77,7 +104,7 @@ public class Room implements Serializable{
 		return sound;
 	}
 	
-	public void setSize(int size) {
+	public void setSize(float size) {
 		this.size=size;
 	}
 	
@@ -105,8 +132,18 @@ public class Room implements Serializable{
 	{
 		this.price= new Price();
 	}
-	public Price getprice(){
-		return price;
+	public void setPrice(float cost){
+		this.price.setCost(cost);
+	}
+	@Override
+	public String toString() {
+		return "Room [Fimage=" + Fimage + ", Iimage=" + Arrays.toString(Iimage) + ", opt=" + opt + ", stair=" + stair
+				+ ", sound=" + sound + ", size=" + size + ", window=" + window + ", clean=" + clean + ", price=" + price
+				+ ", introduce=" + introduce + ", period=" + period + "]";
+	}
+
+	public float getprice(){
+		return price.getCost();
 	}
 	
 	public void setIntroduce(String introduce) {

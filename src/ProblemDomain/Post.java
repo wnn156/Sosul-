@@ -70,6 +70,7 @@ class Condition implements Serializable{
 
 public class Post implements Serializable {
 	private int index;
+	private String title;
 	private Condition condition;
 	private String state;
 	private boolean isView;
@@ -78,15 +79,31 @@ public class Post implements Serializable {
 	
 	public Post(){
 		index = 0;
+		title = null;
 		condition = new Condition();
 		state = null;
 		isView = false;
 		review = null;
 		room = new Room();
 	}
-	
-	public Post(int index,boolean gender, boolean smoke, boolean animal, boolean exitArrangement, boolean clean, String state, boolean isView, Room room, String review){
+	public Post(int index, String title,float size){
 		this.index = index;
+		this.title = title;
+		condition = new Condition();
+		state = null;
+		isView = false;
+		review = null;
+		room = new Room();
+		room.setSize(size);
+	}
+	@Override
+	public String toString() {
+		return "Post [index=" + index + ", title=" + title + ", condition=" + condition + ", state=" + state
+				+ ", isView=" + isView + ", room=" + room + ", review=" + review + "]";
+	}
+	public Post(int index,String title,boolean gender, boolean smoke, boolean animal, boolean exitArrangement, boolean clean, String state, boolean isView, Room room, String review){
+		this.index = index;
+		this.title = title;
 		this.condition = new Condition(gender,smoke,animal,exitArrangement,clean);
 		this.state = state;
 		this.isView = isView;
@@ -105,7 +122,12 @@ public class Post implements Serializable {
 	public int getIndex(){
 		return this.index;
 	}
-	
+	public void setTitle(String title){
+		this.title = title;
+	}
+	public String getTitle(){
+		return title;
+	}
 	public void setCondition(Condition condition){
 		this.condition = condition;
 	}
